@@ -1,3 +1,17 @@
-<h1>Enter Passkey</h1>
-<input type="password" placeholder="passkey" [(ngModel)]="passKey" />
-<button (click)="onSubmitPasskey()">Submit</button>
+<div class="flex flex-col text-center">
+  <div class="flex flex-col flex-grow self-center max-w-96">
+    <h1 class="text-3xl mb-2 text-white font-bold">PASSKEY REQUIRED</h1>
+    <input type="password"
+      class="p-3 text-center border border-gray-400 rounded-full mb-4 font-semibold"
+      placeholder="PASSKEY"
+      [(ngModel)]="passKey" />
+    <div class="relative flex flex-col">
+      <button type="submit"
+        class="p-3 text-xl text-white rounded-full bg-[#196f70] hover:bg-[#21727a] disabled:bg-gray-400 disabled:text-gray-700 font-semibold"
+        [disabled]="!passKey || passKey.length < 8"
+        (click)="onSubmitPasskey()">SUBMIT
+      </button>
+      <span *ngIf="isLoading" class="absolute top-[14px] right-[16px] text-white animate-spin material-symbols-outlined">progress_activity</span>
+    </div>
+  </div>
+</div>
