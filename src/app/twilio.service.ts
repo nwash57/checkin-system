@@ -11,8 +11,8 @@ export class TwilioService {
   private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
-  sendCheckIn(initials: string) {
+  sendCheckIn(initials: string, therapist: string) {
     const functionCode = this.functionCodeService.getFunctionCodeFromLocalStorage();
-    return this.http.post(`${this.apiUrl}/CheckIn?code=${functionCode}`, { initials });
+    return this.http.post(`${this.apiUrl}/CheckIn?code=${functionCode}`, { initials, therapist });
   }
 }

@@ -22,10 +22,10 @@ export class CheckInComponent {
   therapist: 'katie' | 'danielle' | null = null;
   isLoading: boolean = false;
 
-  onCheckIn() {
+  onCheckIn(initials: string) {
     this.isLoading = true;
 
-    this.twilioService.sendCheckIn(this.initials).pipe(
+    this.twilioService.sendCheckIn(this.initials, this.therapist as string).pipe(
       delay(2000)
     ).subscribe(res => {
       this.isLoading = false;
