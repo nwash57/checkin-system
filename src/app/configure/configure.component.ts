@@ -15,7 +15,8 @@ import { PasskeyEntryComponent } from "../passkey-entry/passkey-entry.component"
     ObscureInputDirective,
     PasskeyEntryComponent
   ],
-  templateUrl: './configure.component.html'
+  templateUrl: './configure.component.html',
+  host: { class: 'flex flex-col h-full justify-center'}
 })
 export class ConfigureComponent {
   @Input() set config(value: IConfiguration | null) {
