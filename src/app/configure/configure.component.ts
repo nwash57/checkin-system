@@ -3,6 +3,7 @@ import { NgIf } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import IConfiguration from "./configuration.model";
 import { ObscureInputDirective } from "../obscure-input.directive";
+import { PasskeyEntryComponent } from "../passkey-entry/passkey-entry.component";
 
 @Component({
   selector: 'app-configure',
@@ -11,7 +12,8 @@ import { ObscureInputDirective } from "../obscure-input.directive";
     NgIf,
     ReactiveFormsModule,
     FormsModule,
-    ObscureInputDirective
+    ObscureInputDirective,
+    PasskeyEntryComponent
   ],
   templateUrl: './configure.component.html'
 })
@@ -35,6 +37,8 @@ export class ConfigureComponent {
   public daniellePhone: string = this.config?.daniellePhone || '';
   public katiePhone: string = this.config?.katiePhone || '';
 
+  needsPasskey: boolean = true;
+
   public get inputsValid() {
     return this.accountSid
       && this.authToken
@@ -57,5 +61,9 @@ export class ConfigureComponent {
     return phoneNumber.length === 12
       && phoneNumber.startsWith('+1')
       && phoneNumber.split('').slice(1).every(char => !isNaN(parseInt(char)))
+  }
+
+  onPasskeyCorrect() {
+    this.needsPasskey = false;
   }
 }
