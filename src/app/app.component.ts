@@ -6,23 +6,34 @@ import { CommonModule } from "@angular/common";
 import { FunctionCodeService } from "./function-code.service";
 import { PasskeyEntryComponent } from "./passkey-entry/passkey-entry.component";
 import { CheckInComponent } from "./check-in/check-in.component";
+import { ConfigurationService } from "./configure/configuration.service";
+import { ConfigureComponent } from "./configure/configure.component";
+import IConfiguration from "./configure/configuration.model";
+import { ReconfigureButtonComponent } from "./reconfigure-button/reconfigure-button.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule, PasskeyEntryComponent, CheckInComponent],
+  imports: [CommonModule, RouterOutlet, FormsModule, PasskeyEntryComponent, CheckInComponent, ConfigureComponent, ReconfigureButtonComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
   host: { class: 'flex flex-col h-full'}
 })
 export class AppComponent {
-  private readonly functionCodeService = inject(FunctionCodeService)
 
-  hasFunctionCode: boolean = this.functionCodeService.getFunctionCodeFromLocalStorage() != null;
+  private readonly configurationService = inject(ConfigurationService);
 
   title = 'therapy-checkin';
 
-  onFunctionCodeChange(code: string) {
-    this.hasFunctionCode = code != null;
+  config = this.configurationService.getConfiguration();
+  public get needsConfiguration() { return this.config === null; }
+
+  reconfiguring: boolean = false;
+
+  onSaveConfig(config: IConfiguration) {
+    this.configurationService.saveConfiguration(config);
+  }
+
+  onReconfigurationClicked() {
+    this.reconfiguring = !this.reconfiguring;
   }
 }

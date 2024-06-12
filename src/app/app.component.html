@@ -1,4 +1,7 @@
-<app-passkey-entry *ngIf="!hasFunctionCode"
-  (functionCodeChange)="onFunctionCodeChange($event)"/>
+<app-configure *ngIf="needsConfiguration || reconfiguring"
+  [config]="config"
+  (saveConfig)="onSaveConfig($event)"/>
 
-<app-check-in *ngIf="hasFunctionCode" />
+<app-check-in *ngIf="!needsConfiguration && !reconfiguring" />
+
+<app-reconfigure-button (reconfigureClicked)="onReconfigurationClicked()" />

@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: ''
+  apiUrl: '',
+  twilioApiUrl: 'https://api.twilio.com/2010-04-01'
 };
