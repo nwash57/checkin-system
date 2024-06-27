@@ -21,9 +21,11 @@ export class CheckInComponent {
   initials: string = '';
   therapist: TherapistName | null = null;
   isLoading: boolean = false;
+  showConfirmation: boolean = false;
+  sendTimeout: boolean = false;
 
   onCheckIn() {
-    if (!this.therapist || !this.initials) {
+    if (this.isLoading || !this.therapist || !this.initials) {
       return;
     }
 
@@ -33,10 +35,26 @@ export class CheckInComponent {
       delay(2000)
     ).subscribe(res => {
       this.isLoading = false;
+      this.initials = '';
+      this.showConfirmation = true;
+      this.startSpamTimeout();
+      this.startConfirmationTimeout();
     });
   }
 
   onInitialsChanged(event: any) {
     this.initials = event.toUpperCase();
+  }
+
+  private startConfirmationTimeout() {
+    setTimeout(() => {
+      this.showConfirmation = false;
+    }, 5000);
+  }
+
+  private startSpamTimeout() {
+    setTimeout(() => {
+      this.sendTimeout = false;
+    }, 20000);
   }
 }

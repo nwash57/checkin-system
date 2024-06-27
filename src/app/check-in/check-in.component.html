@@ -50,7 +50,11 @@
         [disabled]="initials.length < 2 || therapist == null"
         (click)="onCheckIn()">SUBMIT
       </button>
-      <span *ngIf="isLoading" class="absolute top-[14px] right-[16px] text-white animate-spin material-symbols-outlined">progress_activity</span>
+      <span *ngIf="isLoading"
+        class="absolute top-[14px] right-[16px] text-white animate-spin material-symbols-outlined">progress_activity</span>
     </div>
+    <span class="text-2xl text-white mt-2" *ngIf="showConfirmation">
+      Check in sent <span class="material-symbols-outlined align-sub">check</span></span>
+    <span class="text-2xl mt-2" *ngIf="!showConfirmation">&nbsp;</span>
   </div>
 </div>
