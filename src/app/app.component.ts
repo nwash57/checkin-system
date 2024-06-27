@@ -31,6 +31,7 @@ export class AppComponent {
 
   onSaveConfig(config: IConfiguration) {
     this.configurationService.saveConfiguration(config);
+    this.reconfiguring = false;
   }
 
   onReconfigurationClicked() {

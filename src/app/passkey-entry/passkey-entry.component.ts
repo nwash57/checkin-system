@@ -23,7 +23,7 @@ export class PasskeyEntryComponent {
       return;
     }
 
-    if (this.passKey != "Mr. Peanutbutter's House") {
+    if (this.passKey != "checkinsystem1138") {
       return;
     }
 
