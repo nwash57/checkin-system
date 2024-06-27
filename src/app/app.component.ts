@@ -30,7 +30,9 @@ export class AppComponent {
   reconfiguring: boolean = false;
 
   onSaveConfig(config: IConfiguration) {
+    console.log('Saving configuration', config);
     this.configurationService.saveConfiguration(config);
+    this.config = config;
     this.reconfiguring = false;
   }
 
