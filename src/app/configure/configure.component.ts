@@ -59,9 +59,9 @@ export class ConfigureComponent {
   }
 
   public phoneNumberValid(phoneNumber: string) {
-    return phoneNumber.length === 12
-      && phoneNumber.startsWith('+1')
-      && phoneNumber.split('').slice(1).every(char => !isNaN(parseInt(char)))
+    return phoneNumber.length === 10
+      && !phoneNumber.startsWith('+1')
+      && phoneNumber.split('').every(char => !isNaN(parseInt(char)))
   }
 
   onPasskeyCorrect() {

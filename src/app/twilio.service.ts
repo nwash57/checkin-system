@@ -28,8 +28,11 @@ export class TwilioService {
     });
 
     const body = new URLSearchParams();
-    body.set('From', config.fromPhone);
-    body.set('To', therapist === 'danielle' ? config.daniellePhone : config.katiePhone);
+    body.set('From', `+1${config.fromPhone}`);
+
+    let therapistPhone = therapist === 'danielle' ? config.daniellePhone : config.katiePhone;
+    body.set('To', `+1${therapistPhone}`);
+
     body.set('Body', `[${this.getCurrentTime()}] Client ${initials} has checked in.`);
 
     return this.http.post(
