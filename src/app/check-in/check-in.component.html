@@ -42,6 +42,7 @@
       placeholder="INITIALS"
       [ngModel]="initials"
       (ngModelChange)="onInitialsChanged($event)"
+      [maxLength]="3"
       required />
 
     <div class="relative flex flex-col">
