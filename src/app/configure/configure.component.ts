@@ -28,7 +28,7 @@ export class ConfigureComponent {
     this.authToken = value.authToken;
     this.fromPhone = value.fromPhone;
     this.daniellePhone = value.daniellePhone;
-    this.katiePhone = value.katiePhone;
+    this.katiPhone = value.katiPhone;
   }
   @Output() public saveConfig = new EventEmitter<IConfiguration>();
 
@@ -36,7 +36,7 @@ export class ConfigureComponent {
   public authToken: string = this.config?.authToken || '';
   public fromPhone: string = this.config?.fromPhone || '';
   public daniellePhone: string = this.config?.daniellePhone || '';
-  public katiePhone: string = this.config?.katiePhone || '';
+  public katiPhone: string = this.config?.katiPhone || '';
 
   needsPasskey: boolean = true;
 
@@ -45,7 +45,7 @@ export class ConfigureComponent {
       && this.authToken
       && this.fromPhone
       && this.phoneNumberValid(this.daniellePhone)
-      && this.phoneNumberValid(this.katiePhone);
+      && this.phoneNumberValid(this.katiPhone);
   }
 
   public onSaveConfig() {
@@ -54,7 +54,7 @@ export class ConfigureComponent {
       authToken: this.authToken,
       fromPhone: this.fromPhone,
       daniellePhone: this.daniellePhone,
-      katiePhone: this.katiePhone
+      katiPhone: this.katiPhone
     });
   }
 

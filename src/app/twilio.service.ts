@@ -30,7 +30,7 @@ export class TwilioService {
     const body = new URLSearchParams();
     body.set('From', `+1${config.fromPhone}`);
 
-    let therapistPhone = therapist === 'danielle' ? config.daniellePhone : config.katiePhone;
+    let therapistPhone = therapist === 'danielle' ? config.daniellePhone : config.katiPhone;
     body.set('To', `+1${therapistPhone}`);
 
     body.set('Body', `[${this.getCurrentTime()}] Client ${initials} has checked in.`);

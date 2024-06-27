@@ -1,1 +1,1 @@
-export type TherapistName = 'danielle' | 'katie';
+export type TherapistName = 'danielle' | 'kati';

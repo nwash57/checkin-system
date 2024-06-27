@@ -3,5 +3,5 @@ export default interface IConfiguration {
   authToken: string;
   fromPhone: string;
   daniellePhone: string;
-  katiePhone: string;
+  katiPhone: string;
 }
