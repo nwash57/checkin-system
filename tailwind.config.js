@@ -5,9 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      gridTemplateColumns: {
-        'auto-33': 'repeat(auto-fit, 33%)',
-      }
     },
   },
   plugins: {
