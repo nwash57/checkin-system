@@ -25,7 +25,7 @@ export class AppComponent {
   title = 'therapy-checkin';
 
   config = this.configurationService.getConfiguration();
-  public get needsConfiguration() { return this.config === null; }
+  public get needsConfiguration() { return this.config === null || !this.config?.therapists?.length; }
 
   reconfiguring: boolean = false;
 
