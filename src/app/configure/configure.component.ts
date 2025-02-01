@@ -37,7 +37,7 @@ export class ConfigureComponent {
   public fromPhone: string = this.config?.fromPhone || '';
   public therapists: ITherapist[] = this.config?.therapists || [];
 
-  needsPasskey: boolean = false;
+  needsPasskey: boolean = true;
 
   public get inputsValid() {
     return this.accountSid
