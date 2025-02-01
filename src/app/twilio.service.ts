@@ -1,8 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../environments/environment";
-import { FunctionCodeService } from "./function-code.service";
-import { TherapistName } from "./therapist-name.type";
 import { ConfigurationService } from "./configure/configuration.service";
 import { EMPTY } from "rxjs";
 
@@ -15,7 +13,7 @@ export class TwilioService {
   private readonly configService = inject(ConfigurationService);
   private readonly http = inject(HttpClient);
 
-  sendCheckInDirect(therapist: TherapistName, initials: string) {
+  sendCheckInDirect(therapist: string, initials: string) {
     const config = this.configService.getConfiguration();
     if (!config) {
       console.error("No configuration found");
@@ -30,7 +28,7 @@ export class TwilioService {
     const body = new URLSearchParams();
     body.set('From', `+1${config.fromPhone}`);
 
-    let therapistPhone = therapist === 'danielle' ? config.daniellePhone : config.katiPhone;
+    let therapistPhone = config.therapists.find(t => t.name === therapist)?.phone;
     body.set('To', `+1${therapistPhone}`);
 
     body.set('Body', `[${this.getCurrentTime()}] Client ${initials} has checked in.`);

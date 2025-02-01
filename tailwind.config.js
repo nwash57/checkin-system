@@ -4,8 +4,14 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        'auto-33': 'repeat(auto-fit, 33%)',
+      }
+    },
   },
-  plugins: [],
+  plugins: {
+    "@tailwindcss/postcss": {},
+  }
 }
 

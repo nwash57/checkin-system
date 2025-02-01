@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgIf } from "@angular/common";
+import { CommonModule, NgIf } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import IConfiguration from "./configuration.model";
 import { ObscureInputDirective } from "../obscure-input.directive";
 import { PasskeyEntryComponent } from "../passkey-entry/passkey-entry.component";
+import ITherapist from './therapist.model';
 
 @Component({
   selector: 'app-configure',
   standalone: true,
   imports: [
-    NgIf,
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     ObscureInputDirective,
@@ -27,25 +28,22 @@ export class ConfigureComponent {
     this.accountSid = value.accountSid;
     this.authToken = value.authToken;
     this.fromPhone = value.fromPhone;
-    this.daniellePhone = value.daniellePhone;
-    this.katiPhone = value.katiPhone;
+    this.therapists = value.therapists || [];
   }
   @Output() public saveConfig = new EventEmitter<IConfiguration>();
 
   public accountSid: string = this.config?.accountSid || ''
   public authToken: string = this.config?.authToken || '';
   public fromPhone: string = this.config?.fromPhone || '';
-  public daniellePhone: string = this.config?.daniellePhone || '';
-  public katiPhone: string = this.config?.katiPhone || '';
+  public therapists: ITherapist[] = this.config?.therapists || [];
 
-  needsPasskey: boolean = true;
+  needsPasskey: boolean = false;
 
   public get inputsValid() {
     return this.accountSid
       && this.authToken
       && this.fromPhone
-      && this.phoneNumberValid(this.daniellePhone)
-      && this.phoneNumberValid(this.katiPhone);
+      && this.therapists.every(t => this.therapistValid(t))
   }
 
   public onSaveConfig() {
@@ -53,9 +51,12 @@ export class ConfigureComponent {
       accountSid: this.accountSid,
       authToken: this.authToken,
       fromPhone: this.fromPhone,
-      daniellePhone: this.daniellePhone,
-      katiPhone: this.katiPhone
+      therapists: this.therapists
     });
+  }
+
+  public therapistValid(therapist: ITherapist) {
+    return therapist.name.length > 0 && this.phoneNumberValid(therapist.phone);
   }
 
   public phoneNumberValid(phoneNumber: string) {
@@ -66,5 +67,25 @@ export class ConfigureComponent {
 
   onPasskeyCorrect() {
     this.needsPasskey = false;
+  }
+
+  onAddTherapist() {
+    this.therapists = [...this.therapists, {name: '', phone: ''}];
+  }
+
+  onRemoveTherapist(index: number) {
+    this.therapists.splice(index, 1);
+  }
+
+  onMoveTherapistUp(index: number) {
+    const therapist = this.therapists[index];
+    this.therapists.splice(index, 1);
+    this.therapists.splice(index - 1, 0, therapist);
+  }
+
+  onMoveTherapistDown(index: number) {
+    const therapist = this.therapists[index];
+    this.therapists.splice(index, 1);
+    this.therapists.splice(index + 1, 0, therapist);
   }
 }

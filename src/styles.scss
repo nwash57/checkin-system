@@ -1,8 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-ha-dark-green-2: #3d4435;
+  --color-ha-dark-green-1: #494F40;
+  --color-ha-tan-1: #e7d9cb;
+  --color-ha-beige-1: #f7f1e7;
+}
 
 body {
   height: 100vh;
-  background-color: #3f7fa1;
+  background-color: #3d4435;
+  font-family: 'Marcellus', serif; //, serif;
 }
